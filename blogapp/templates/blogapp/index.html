@@ -1,0 +1,89 @@
+{% extends 'blogapp/base.html' %}
+{% load static %}
+{% block content %}
+<div class="">
+    <!-- Blogs Section -->
+    <div class="container">
+        <!-- All Post-->
+        {% include 'messages.html' %}
+        <div class="" id="cate">
+
+            <div class="row justify-content-md-between align-items-md-center">
+
+                <div  class="col-md-8 mb-3 mb-md-0">
+                </div>
+                <div class="col-md-4 col-lg-4 text-md-right">
+                    <!--  Filter Form-->
+                    <form class="input-group input-group-merge" method="GET" action="{% url 'index' %}#cate">
+                        <input type="text" name="title__icontains" value="{{ request.GET.title__icontains }}" id="id_title__icontains" class="form-control"
+                        placeholder="Search Insights">
+                        <div class="input-group-append">
+                          <button type="submit" class="btn" id="searchApp">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <!-- End  Filter Form-->
+            </div>
+        </div>
+
+
+        <hr>
+
+        <div class="row mb-3">
+            {% for post in filter.qs %}
+
+            <div class="col-sm-6 col-lg-4 mb-3 mb-sm-8">
+                <!-- Blog Card -->
+                <article class="card h-100">
+                    <div class="card-img-top position-relative">
+                        <img class="card-img-top" src="{{ post.image.url }}" alt="Image Description">
+                        <figure class="ie-curved-y position-absolute right-0 bottom-0 left-0 mb-n1">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1920 100.1">
+                                <path fill="#fff" d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"/>
+                            </svg>
+                        </figure>
+                    </div>
+
+                    <div class="card-body">
+                        <h3><a class="text-inherit card-title" href="{% url 'article_detail' post.slug %}">{{ post.title }}</a>
+                        </h3>
+                        <p class="font-size-1 card-text text-truncate">{{ post.body|safe|truncatewords:30 }}</p>
+                    </div>
+
+                    <div class="card-footer border-0 pt-0">
+                        <div class="media align-items-center">
+                            <div class="avatar-group">
+                                <a class="avatar avatar-xs avatar-circle" href="#" data-toggle="tooltip"
+                                data-placement="top" title="{{ post.author }}">
+                                <img class="avatar-img" src="{% static 'img/img12.jpg' %}"
+                                alt="Image Description">
+                            </a>
+                        </div>
+                        <div class="media-body d-flex justify-content-end text-muted font-size-1 ml-2">
+                            {{ post.created_at }}
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <!-- End Blog Card -->
+        </div>
+
+
+        {% endfor %}
+    </div>
+</div>
+<!-- End All Post-->
+
+</div>
+<!-- End Blogs Section -->
+`
+</div>
+
+
+<script>
+    window.onload = function(){
+        $('#{{ currcat }}').removeClass('badge-secondary').addClass('badge-primary disabled');
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'blogapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container space-1">
+	<div class="row no-gutters">
+		<div class="col-md-8 col-lg-7 col-xl-6 offset-md-2 offset-lg-2 offset-xl-3 space-2">
+			<!-- Form -->
+			<form class="js-validate" method="POST">
+
+				{%csrf_token%}
+				<!-- Title -->
+				<div class="text-center mb-5 mb-md-7 text-center">
+					<h1 class="h2">Welcome back</h1>
+					<p>Login to check the prediction.</p>
+				</div>
+				<!-- End Title -->
+
+				{% include 'messages.html' %}
+
+				<!-- Form Group -->
+				<div class="js-form-message form-group">
+					<label class="input-label" for="username">Username</label>
+					<input type="text" class="form-control" name="username" id="username" tabindex="1" placeholder="Username" aria-label="Username" required
+					data-msg="Please enter a valid Username.">
+				</div>
+				<!-- End Form Group -->
+
+				<!-- Form Group -->
+				<div class="js-form-message form-group">
+					<label class="input-label" for="signinSrPasswordExample2" tabindex="0">
+						<span class="d-flex justify-content-between align-items-center">
+							Password
+						</span>
+					</label>
+					<input type="password" class="form-control" name="password" id="signinSrPasswordExample2" tabindex="2" placeholder="********" aria-label="********" required
+					data-msg="Your password is invalid. Please try again.">
+				</div>
+				<!-- End Form Group -->
+
+				<!-- Button -->
+				<div class="row align-items-center mb-5">
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<span class="font-size-1 text-muted">Don't have an account?</span>
+						<a class="font-size-1 font-weight-bold" href="{% url 'register' %}">Signup</a>
+					</div>
+
+					<div class="col-sm-6 text-sm-right">
+						<button type="submit" class="btn btn-primary transition-3d-hover">Get Started</button>
+					</div>
+				</div>
+				<!-- End Button -->
+			</form>
+			<!-- End Form -->
+		</div>
+	</div>
+</div>
+
+{% endblock %}

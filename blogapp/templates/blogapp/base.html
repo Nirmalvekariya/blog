@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block meta %}{% endblock %}
+    {% load static %}
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Roboto|Roboto+Condensed|Roboto+Slab|Oswald|Open+Sans|Open+Sans+Condensed|Merriweather+Sans|Caveat|Caveat+Brush|Balsamiq+Sans"
+          rel="stylesheet">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+          integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{% static 'vendor/hs-mega-menu/dist/hs-mega-menu.min.css' %}">
+
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/readmore.min.css' %}"></script>
+
+    <style>
+        img {
+          display: block;
+          max-width: 100%;
+          height: auto;
+        }
+        .truncate {
+  line-height: 20px;
+  max-height: 20px;
+  overflow: hidden;
+  display:inline-block;
+}
+
+    </style>
+    {% block style %}  {% endblock %}
+
+    <title>{% block title %} Blog {% endblock %}</title>
+</head>
+<body>
+
+{% block header %}
+<!-- ========== HEADER ========== -->
+<header id="header" class="header header-bg-transparent-lg header-abs-top-lg">
+    <div class="header-section">
+        <div id="logoAndNav" class="container">
+            <!-- Nav -->
+            <nav class="js-mega-menu navbar navbar-expand-lg">
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <p class="text-dark font-size-3">Blogs</p>
+                </a>
+                <!-- End Logo -->
+
+                <!-- Responsive Toggle Button -->
+                <button type="button" class="navbar-toggler btn btn-icon btn-sm rounded-circle"
+                        aria-label="Toggle navigation"
+                        aria-expanded="false"
+                        aria-controls="navBar"
+                        data-toggle="collapse"
+                        data-target="#navBar">
+                <span class="navbar-toggler-default">
+                  <svg width="14" height="14" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="currentColor"
+                          d="M17.4,6.2H0.6C0.3,6.2,0,5.9,0,5.5V4.1c0-0.4,0.3-0.7,0.6-0.7h16.9c0.3,0,0.6,0.3,0.6,0.7v1.4C18,5.9,17.7,6.2,17.4,6.2z M17.4,14.1H0.6c-0.3,0-0.6-0.3-0.6-0.7V12c0-0.4,0.3-0.7,0.6-0.7h16.9c0.3,0,0.6,0.3,0.6,0.7v1.4C18,13.7,17.7,14.1,17.4,14.1z"/>
+                </svg>
+            </span>
+                    <span class="navbar-toggler-toggled">
+              <svg width="14" height="14" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor"
+                      d="M11.5,9.5l5-5c0.2-0.2,0.2-0.6-0.1-0.9l-1-1c-0.3-0.3-0.7-0.3-0.9-0.1l-5,5l-5-5C4.3,2.3,3.9,2.4,3.6,2.6l-1,1 C2.4,3.9,2.3,4.3,2.5,4.5l5,5l-5,5c-0.2,0.2-0.2,0.6,0.1,0.9l1,1c0.3,0.3,0.7,0.3,0.9,0.1l5-5l5,5c0.2,0.2,0.6,0.2,0.9-0.1l1-1 c0.3-0.3,0.3-0.7,0.1-0.9L11.5,9.5z"/>
+            </svg>
+        </span>
+                </button>
+                <!-- End Responsive Toggle Button -->
+
+                <!-- Navigation -->
+                <div id="navBar" class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+
+                        <!-- Reports -->
+                        <li class=" navbar-nav-item">
+                            <a class="nav-link" href="{% url 'index' %}">Posts</a>
+                        </li>
+                        <!-- End Reports -->
+
+                        <!-- Pricing -->
+                        <li class=" navbar-nav-item">
+                            <a class="nav-link" href="{% url 'add_post' %}">Add Posts</a>
+                        </li>
+                        <!-- End Pricing -->
+
+                        <!-- Login/Register -->
+                        <li class="navbar-nav-item dropdown">
+                            {% if user.is_authenticated %}
+                            <a class="transition-3d-hover nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i> &nbsp;
+                                {{ user.first_name }}&nbsp; {{ user.last_name }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                            </div>
+                            {% else %}
+                            <!--                            admin/login/?next=/-->
+                            <a class="nav-link" href="{% url 'login' %}?next=/">Login</a>
+                            {% endif %}
+                        </li>
+                        <!-- End Login/Register -->
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- ========== END HEADER ========== -->
+{% endblock %}
+
+<p></p>
+<div class="container space-2">
+    {% block content %}{% endblock %}
+</div>
+
+{% block footer %}
+
+{% endblock %}
+
+
+<!-- JS Global Compulsory -->
+<script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/jquery-migrate/dist/jquery-migrate.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- JS Implementing Plugins -->
+<script src="{% static 'vendor/hs-header/dist/hs-header.min.js' %}"></script>
+<script src="{% static 'vendor/hs-mega-menu/dist/hs-mega-menu.min.js' %}"></script>
+
+
+<!-- JS Front -->
+<script src="{% static 'js/hs.core.js' %}"></script>
+    <script src="{% static 'js/readmore.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/infinite.min.js' %}"></script>
+
+{% block script %}  {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'blogapp/base.html' %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+<h1>Add Blog Posts</h1>
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Post</button>
+
+</form>
+
+<!--<script>-->
+<!--    var name = "{{ user.id }}";-->
+<!--    document.getElementById("author").value = name;-->
+<!--</script>-->
+{% else %}
+<h3>Login First</h3>
+    {% endif %}
+
+{% endblock %}

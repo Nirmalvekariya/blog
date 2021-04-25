@@ -1,0 +1,22 @@
+{% extends 'blogapp/base.html' %}
+{% block title %} Edit Blog Post {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+
+<h1>Update Blog Post</h1>
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Update</button>
+
+</form>
+    {% endif %}
+
+{% else %}
+<h1>Not Allowed</h1>
+    {% endif %}
+{% endblock %}
